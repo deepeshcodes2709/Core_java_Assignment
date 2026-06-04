@@ -1,0 +1,525 @@
+SQL Assignment Questions
+
+1. Display all salespeople.
+mysql> select * from salespeople;
++------+---------+-----------+------+
+| Snum | Sname   | City      | Comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.12 |
+| 1002 | Serres  | San Jose  | 0.13 |
+| 1003 | Motika  | London    | 0.14 |
+| 1007 | Rifkin  | Barcelona | 0.15 |
+| 1004 | Axelrod | New York  | 0.11 |
++------+---------+-----------+------+
+5 rows in set (0.00 sec)
+
+
+2. Display all customers.
+mysql> select * from  customers;
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | London   |    100 | 1001 |
+| 2002 | Giovanni | Rome     |    200 | 1002 |
+| 2003 | Liu      | San Jose |    200 | 1003 |
+| 2004 | Grass    | Berlin   |    300 | 1003 |
+| 2006 | Clemens  | London   |    100 | 1001 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
+| 2007 | Pereira  | Rome     |    100 | 1004 |
++------+----------+----------+--------+------+
+7 rows in set (0.00 sec)
+
+
+3. Display all orders.
+mysql> select * from orders;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   18.62 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  752.62 | 1990-10-04 | 2004 | 1001 |
+| 3002 | 1254.42 | 1990-10-05 | 2007 | 1004 |
+| 3005 | 1244.42 | 1990-10-03 | 2003 | 1002 |
+| 3008 |   75.42 | 1990-10-06 | 2008 | 1007 |
++------+---------+------------+------+------+
+5 rows in set (0.00 sec)
+
+
+4. Show names of all salespeople.
+mysql> select Sname from salespeople;
++---------+
+| Sname   |
++---------+
+| Peel    |
+| Serres  |
+| Motika  |
+| Rifkin  |
+| Axelrod |
++---------+
+5 rows in set (0.00 sec)
+
+5. Show customer names and ratings.
+mysql> select Cname, Rating from customers;
++----------+--------+
+| Cname    | Rating |
++----------+--------+
+| Hoffman  |    100 |
+| Giovanni |    200 |
+| Liu      |    200 |
+| Grass    |    300 |
+| Clemens  |    100 |
+| Cisneros |    300 |
+| Pereira  |    100 |
++----------+--------+
+7 rows in set (0.00 sec)
+
+
+6. Find customers from London.
+mysql> select * from customers where city = 'London';
++------+---------+--------+--------+------+
+| Cnum | Cname   | City   | Rating | Snum |
++------+---------+--------+--------+------+
+| 2001 | Hoffman | London |    100 | 1001 |
+| 2006 | Clemens | London |    100 | 1001 |
++------+---------+--------+--------+------+
+2 rows in set (0.00 sec)
+
+7. Find salespeople from London.
+mysql> select * from salespeople where city = 'London';
++------+--------+--------+------+
+| Snum | Sname  | City   | Comm |
++------+--------+--------+------+
+| 1001 | Peel   | London | 0.12 |
+| 1003 | Motika | London | 0.14 |
++------+--------+--------+------+
+
+8. Find orders whose amount is greater than 1000.
+mysql> select * from orders where Amt > 1000;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3002 | 1254.42 | 1990-10-05 | 2007 | 1004 |
+| 3005 | 1244.42 | 1990-10-03 | 2003 | 1002 |
++------+---------+------------+------+------+
+2 rows in set (0.00 sec)
+
+
+9. Find customers with rating 300.
+mysql> select * from customers where Rating = 300;
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2004 | Grass    | Berlin   |    300 | 1003 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
++------+----------+----------+--------+------+
+2 rows in set (0.00 sec)
+
+10. Find orders placed on '04-OCT-1990'.
+mysql> select * from orders where Odate = '1990-10-04';
++------+--------+------------+------+------+
+| Onum | Amt    | Odate      | Cnum | Snum |
++------+--------+------------+------+------+
+| 3003 | 752.62 | 1990-10-04 | 2004 | 1001 |
++------+--------+------------+------+------+
+1 row in set (0.00 sec)
+
+11. Display customer name and salesperson name.
+mysql> select customers.Cname, salespeople.Sname from customers,salespeople;
++----------+---------+
+| Cname    | Sname   |
++----------+---------+
+| Hoffman  | Axelrod |
+| Hoffman  | Rifkin  |
+| Hoffman  | Motika  |
+| Hoffman  | Serres  |
+| Hoffman  | Peel    |
+| Giovanni | Axelrod |
+| Giovanni | Rifkin  |
+| Giovanni | Motika  |
+| Giovanni | Serres  |
+| Giovanni | Peel    |
+| Liu      | Axelrod |
+| Liu      | Rifkin  |
+| Liu      | Motika  |
+| Liu      | Serres  |
+| Liu      | Peel    |
+| Grass    | Axelrod |
+| Grass    | Rifkin  |
+| Grass    | Motika  |
+| Grass    | Serres  |
+| Grass    | Peel    |
+| Clemens  | Axelrod |
+| Clemens  | Rifkin  |
+| Clemens  | Motika  |
+| Clemens  | Serres  |
+| Clemens  | Peel    |
+| Cisneros | Axelrod |
+| Cisneros | Rifkin  |
+| Cisneros | Motika  |
+| Cisneros | Serres  |
+| Cisneros | Peel    |
+| Pereira  | Axelrod |
+| Pereira  | Rifkin  |
+| Pereira  | Motika  |
+| Pereira  | Serres  |
+| Pereira  | Peel    |
++----------+---------+
+35 rows in set (0.00 sec)
+
+12. Display order number, customer name, and salesperson name.
+mysql> select orders.Onum, customers.Cname, salespeople.Sname from orders,customers,salespeople;
++------+----------+---------+
+| Onum | Cname    | Sname   |
++------+----------+---------+
+| 3008 | Hoffman  | Peel    |
+| 3008 | Hoffman  | Serres  |
+| 3008 | Hoffman  | Motika  |
+| 3008 | Hoffman  | Rifkin  |
+| 3008 | Hoffman  | Axelrod |
+| 3005 | Hoffman  | Peel    |
+| 3005 | Hoffman  | Serres  |
+| 3005 | Hoffman  | Motika  |
+| 3005 | Hoffman  | Rifkin  |
+| 3005 | Hoffman  | Axelrod |
+| 3002 | Hoffman  | Peel    |
+| 3002 | Hoffman  | Serres  |
+| 3002 | Hoffman  | Motika  |
+| 3002 | Hoffman  | Rifkin  |
+| 3002 | Hoffman  | Axelrod |
+| 3003 | Hoffman  | Peel    |
+| 3003 | Hoffman  | Serres  |
+| 3003 | Hoffman  | Motika  |
+| 3003 | Hoffman  | Rifkin  |
+| 3003 | Hoffman  | Axelrod |
+| 3001 | Hoffman  | Peel    |
+| 3001 | Hoffman  | Serres  |
+| 3001 | Hoffman  | Motika  |
+| 3001 | Hoffman  | Rifkin  |
+| 3001 | Hoffman  | Axelrod |
+| 3008 | Giovanni | Peel    |
+| 3008 | Giovanni | Serres  |
+| 3008 | Giovanni | Motika  |
+| 3008 | Giovanni | Rifkin  |
+| 3008 | Giovanni | Axelrod |
+| 3005 | Giovanni | Peel    |
+| 3005 | Giovanni | Serres  |
+| 3005 | Giovanni | Motika  |
+| 3005 | Giovanni | Rifkin  |
+| 3005 | Giovanni | Axelrod |
+| 3002 | Giovanni | Peel    |
+| 3002 | Giovanni | Serres  |
+| 3002 | Giovanni | Motika  |
+| 3002 | Giovanni | Rifkin  |
+| 3002 | Giovanni | Axelrod |
+| 3003 | Giovanni | Peel    |
+| 3003 | Giovanni | Serres  |
+| 3003 | Giovanni | Motika  |
+| 3003 | Giovanni | Rifkin  |
+| 3003 | Giovanni | Axelrod |
+| 3001 | Giovanni | Peel    |
+| 3001 | Giovanni | Serres  |
+| 3001 | Giovanni | Motika  |
+| 3001 | Giovanni | Rifkin  |
+| 3001 | Giovanni | Axelrod |
+| 3008 | Liu      | Peel    |
+| 3008 | Liu      | Serres  |
+| 3008 | Liu      | Motika  |
+| 3008 | Liu      | Rifkin  |
+| 3008 | Liu      | Axelrod |
+| 3005 | Liu      | Peel    |
+| 3005 | Liu      | Serres  |
+| 3005 | Liu      | Motika  |
+| 3005 | Liu      | Rifkin  |
+| 3005 | Liu      | Axelrod |
+| 3002 | Liu      | Peel    |
+| 3002 | Liu      | Serres  |
+| 3002 | Liu      | Motika  |
+| 3002 | Liu      | Rifkin  |
+| 3002 | Liu      | Axelrod |
+| 3003 | Liu      | Peel    |
+| 3003 | Liu      | Serres  |
+| 3003 | Liu      | Motika  |
+| 3003 | Liu      | Rifkin  |
+| 3003 | Liu      | Axelrod |
+| 3001 | Liu      | Peel    |
+| 3001 | Liu      | Serres  |
+| 3001 | Liu      | Motika  |
+| 3001 | Liu      | Rifkin  |
+| 3001 | Liu      | Axelrod |
+| 3008 | Grass    | Peel    |
+| 3008 | Grass    | Serres  |
+| 3008 | Grass    | Motika  |
+| 3008 | Grass    | Rifkin  |
+| 3008 | Grass    | Axelrod |
+| 3005 | Grass    | Peel    |
+| 3005 | Grass    | Serres  |
+| 3005 | Grass    | Motika  |
+| 3005 | Grass    | Rifkin  |
+| 3005 | Grass    | Axelrod |
+| 3002 | Grass    | Peel    |
+| 3002 | Grass    | Serres  |
+| 3002 | Grass    | Motika  |
+| 3002 | Grass    | Rifkin  |
+| 3002 | Grass    | Axelrod |
+| 3003 | Grass    | Peel    |
+| 3003 | Grass    | Serres  |
+| 3003 | Grass    | Motika  |
+| 3003 | Grass    | Rifkin  |
+| 3003 | Grass    | Axelrod |
+| 3001 | Grass    | Peel    |
+| 3001 | Grass    | Serres  |
+| 3001 | Grass    | Motika  |
+| 3001 | Grass    | Rifkin  |
+| 3001 | Grass    | Axelrod |
+| 3008 | Clemens  | Peel    |
+| 3008 | Clemens  | Serres  |
+| 3008 | Clemens  | Motika  |
+| 3008 | Clemens  | Rifkin  |
+| 3008 | Clemens  | Axelrod |
+| 3005 | Clemens  | Peel    |
+| 3005 | Clemens  | Serres  |
+| 3005 | Clemens  | Motika  |
+| 3005 | Clemens  | Rifkin  |
+| 3005 | Clemens  | Axelrod |
+| 3002 | Clemens  | Peel    |
+| 3002 | Clemens  | Serres  |
+| 3002 | Clemens  | Motika  |
+| 3002 | Clemens  | Rifkin  |
+| 3002 | Clemens  | Axelrod |
+| 3003 | Clemens  | Peel    |
+| 3003 | Clemens  | Serres  |
+| 3003 | Clemens  | Motika  |
+| 3003 | Clemens  | Rifkin  |
+| 3003 | Clemens  | Axelrod |
+| 3001 | Clemens  | Peel    |
+| 3001 | Clemens  | Serres  |
+| 3001 | Clemens  | Motika  |
+| 3001 | Clemens  | Rifkin  |
+| 3001 | Clemens  | Axelrod |
+| 3008 | Cisneros | Peel    |
+| 3008 | Cisneros | Serres  |
+| 3008 | Cisneros | Motika  |
+| 3008 | Cisneros | Rifkin  |
+| 3008 | Cisneros | Axelrod |
+| 3005 | Cisneros | Peel    |
+| 3005 | Cisneros | Serres  |
+| 3005 | Cisneros | Motika  |
+| 3005 | Cisneros | Rifkin  |
+| 3005 | Cisneros | Axelrod |
+| 3002 | Cisneros | Peel    |
+| 3002 | Cisneros | Serres  |
+| 3002 | Cisneros | Motika  |
+| 3002 | Cisneros | Rifkin  |
+| 3002 | Cisneros | Axelrod |
+| 3003 | Cisneros | Peel    |
+| 3003 | Cisneros | Serres  |
+| 3003 | Cisneros | Motika  |
+| 3003 | Cisneros | Rifkin  |
+| 3003 | Cisneros | Axelrod |
+| 3001 | Cisneros | Peel    |
+| 3001 | Cisneros | Serres  |
+| 3001 | Cisneros | Motika  |
+| 3001 | Cisneros | Rifkin  |
+| 3001 | Cisneros | Axelrod |
+| 3008 | Pereira  | Peel    |
+| 3008 | Pereira  | Serres  |
+| 3008 | Pereira  | Motika  |
+| 3008 | Pereira  | Rifkin  |
+| 3008 | Pereira  | Axelrod |
+| 3005 | Pereira  | Peel    |
+| 3005 | Pereira  | Serres  |
+| 3005 | Pereira  | Motika  |
+| 3005 | Pereira  | Rifkin  |
+| 3005 | Pereira  | Axelrod |
+| 3002 | Pereira  | Peel    |
+| 3002 | Pereira  | Serres  |
+| 3002 | Pereira  | Motika  |
+| 3002 | Pereira  | Rifkin  |
+| 3002 | Pereira  | Axelrod |
+| 3003 | Pereira  | Peel    |
+| 3003 | Pereira  | Serres  |
+| 3003 | Pereira  | Motika  |
+| 3003 | Pereira  | Rifkin  |
+| 3003 | Pereira  | Axelrod |
+| 3001 | Pereira  | Peel    |
+| 3001 | Pereira  | Serres  |
+| 3001 | Pereira  | Motika  |
+| 3001 | Pereira  | Rifkin  |
+| 3001 | Pereira  | Axelrod |
++------+----------+---------+
+175 rows in set (0.00 sec)
+
+13. Display all customers and their salespeople.
+mysql> select customers.Cname, salespeople.Sname from customers, salespeople where Customers.Snum = salespeople.Snum;
++----------+---------+
+| Cname    | Sname   |
++----------+---------+
+| Hoffman  | Peel    |
+| Giovanni | Serres  |
+| Liu      | Motika  |
+| Grass    | Motika  |
+| Clemens  | Peel    |
+| Cisneros | Rifkin  |
+| Pereira  | Axelrod |
++----------+---------+
+7 rows in set (0.00 sec)
+
+14. Display orders with customer city.
+mysql> select orders.Onum, customers.City from orders,customers where orders.Cnum = customers.Cnum;
++------+----------+
+| Onum | City     |
++------+----------+
+| 3005 | San Jose |
+| 3003 | Berlin   |
+| 3008 | San Jose |
+| 3001 | San Jose |
+| 3002 | Rome     |
++------+----------+
+5 rows in set (0.00 sec)
+
+15. Update commission of salesperson 'Peel' to 0.15.
+mysql> update salespeople set comm = 0.15 where Sname = "peel";
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> table salespeople;
++------+---------+-----------+------+
+| Snum | Sname   | City      | Comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.15 |
+| 1002 | Serres  | San Jose  | 0.13 |
+| 1003 | Motika  | London    | 0.14 |
+| 1007 | Rifkin  | Barcelona | 0.15 |
+| 1004 | Axelrod | New York  | 0.11 |
++------+---------+-----------+------+
+5 rows in set (0.00 sec)
+
+16. Increase commission of all salespeople by 2%.
+mysql> update salespeople set comm = comm + 0.02;
+Query OK, 5 rows affected (0.02 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from salespeople;
++------+---------+-----------+------+
+| Snum | Sname   | City      | Comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.17 |
+| 1002 | Serres  | San Jose  | 0.15 |
+| 1003 | Motika  | London    | 0.16 |
+| 1007 | Rifkin  | Barcelona | 0.17 |
+| 1004 | Axelrod | New York  | 0.13 |
++------+---------+-----------+------+
+5 rows in set (0.00 sec)
+
+17. Change city of customer 'Hoffman' to 'Paris'.
+mysql> update customers set city = 'Paris' where Cname = 'Hoffman';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> table customers;
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | Paris    |    100 | 1001 |
+| 2002 | Giovanni | Rome     |    200 | 1002 |
+| 2003 | Liu      | San Jose |    200 | 1003 |
+| 2004 | Grass    | Berlin   |    300 | 1003 |
+| 2006 | Clemens  | London   |    100 | 1001 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
+| 2007 | Pereira  | Rome     |    100 | 1004 |
++------+----------+----------+--------+------+
+7 rows in set (0.00 sec)
+
+18. Update rating of all London customers to 200.
+mysql> update customers set rating = '200' where customers.Rating;
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 7  Changed: 5  Warnings: 0
+mysql> table customers;
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | Paris    |    200 | 1001 |
+| 2002 | Giovanni | Rome     |    200 | 1002 |
+| 2003 | Liu      | San Jose |    200 | 1003 |
+| 2004 | Grass    | Berlin   |    200 | 1003 |
+| 2006 | Clemens  | London   |    200 | 1001 |
+| 2008 | Cisneros | San Jose |    200 | 1007 |
+| 2007 | Pereira  | Rome     |    200 | 1004 |
++------+----------+----------+--------+------+
+7 rows in set (0.00 sec)
+
+
+19. Increase order amount by 10% for orders less than 1000.
+mysql> update orders set Amt = Amt * 1.10 where Amt < 1000;
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+mysql> table orders;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   20.48 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  827.88 | 1990-10-04 | 2004 | 1001 |
+| 3002 | 1254.42 | 1990-10-05 | 2007 | 1004 |
+| 3005 | 1244.42 | 1990-10-03 | 2003 | 1002 |
+| 3008 |   82.96 | 1990-10-06 | 2008 | 1007 |
++------+---------+------------+------+------+
+5 rows in set (0.00 sec)
+
+
+20. Delete customer with Cnum = 2008.
+mysql> delete from customers where customers.Cnum = 2008;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> table customers;
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | Paris    |    200 | 1001 |
+| 2002 | Giovanni | Rome     |    200 | 1002 |
+| 2003 | Liu      | San Jose |    200 | 1003 |
+| 2004 | Grass    | Berlin   |    200 | 1003 |
+| 2006 | Clemens  | London   |    200 | 1001 |
+| 2007 | Pereira  | Rome     |    200 | 1004 |
++------+----------+----------+--------+------+
+6 rows in set (0.00 sec)
+
+21. Delete orders with amount less than 100.
+mysql> delete from orders where orders.Amt < 100;
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> table orders;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3003 |  827.88 | 1990-10-04 | 2004 | 1001 |
+| 3002 | 1254.42 | 1990-10-05 | 2007 | 1004 |
+| 3005 | 1244.42 | 1990-10-03 | 2003 | 1002 |
++------+---------+------------+------+------+
+3 rows in set (0.00 sec)
+
+22. Delete all customers from Berlin.
+mysql> delete from customers  where customers.city = 'berlin';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> table customers;
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | Paris    |    200 | 1001 |
+| 2002 | Giovanni | Rome     |    200 | 1002 |
+| 2003 | Liu      | San Jose |    200 | 1003 |
+| 2006 | Clemens  | London   |    200 | 1001 |
+| 2007 | Pereira  | Rome     |    200 | 1004 |
++------+----------+----------+--------+------+
+5 rows in set (0.00 sec)
+
+23. Delete salesperson Rahul (1008).
+24. Insert a customer and immediately retrieve their details.
+25. Update customer rating and display updated record.
+26. Delete a customer and verify deletion.
+27. Create a backup table and copy all order records.
+28. Insert an order only if the customer exists.
+29. Delete all orders of a particular customer.
+30. Update all order amounts by adding GST (18%).
+31. Display top 3 highest-value orders.
+32. Find customers who have placed more than one order.
+33. Find salespeople who have no orders.
+34. Find customer who placed the highest-value order.
