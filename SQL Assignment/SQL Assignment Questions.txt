@@ -523,3 +523,42 @@ mysql> table customers;
 32. Find customers who have placed more than one order.
 33. Find salespeople who have no orders.
 34. Find customer who placed the highest-value order.
+
+1. Display Student Name and Department Name.
+mysql> select s.name from student s join department d where s.department_Id = d.department_Id;
++---------+
+| name    |
++---------+
+| Deepesh |
+| Bhanu   |
++---------+
+2 rows in set (0.00 sec)
+
+
+2. Display Roll Number, Student Name, and Department Name.
+mysql> select s.roll , s.name, d.department_Id from student s join department d where s.department_Id = d.department_Id;
++------+---------+---------------+
+| roll | name    | department_Id |
++------+---------+---------------+
+|  100 | Deepesh |            10 |
+|  102 | Bhanu   |            20 |
++------+---------+---------------+
+2 rows in set (0.00 sec)
+
+3. Display Students Belonging to the IT Department.
+mysql> select s.roll, s.name, s.email, d.department_Id from student s join department d on s.department_Id = d.department_Id where d.name = 'IT';
++------+-------+-------------+---------------+
+| roll | name  | email       | department_Id |
++------+-------+-------------+---------------+
+|  102 | Bhanu | B@gamil.com |            20 |
++------+-------+-------------+---------------+
+1 row in set (0.00 sec)
+
+4. Display Students Having Marks Greater Than 80 with Their Department
+mysql> select s.name ,s.marks , d.name from student s join department d on s.department_id = d.department_Id where s.marks > 80;
++---------+-------+---------------------+
+| name    | marks | name                |
++---------+-------+---------------------+
+| Deepesh |    89 | computer department |
++---------+-------+---------------------+
+1 row in set (0.00 sec)
